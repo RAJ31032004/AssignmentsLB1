@@ -1,0 +1,64 @@
+#include<stdio.h>
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Function Name :   DivInt
+//  Description   :   Performs division of two integers safely
+//  Input         :   Integer, Integer
+//  Output        :   Integer
+//
+/////////////////////////////////////////////////////////////////////////////////////////////
+int DivInt(int no1, int no2)
+{
+    if(no2 == 0)
+    {
+        printf("Error : Division by zero\n");
+        return 0;
+    }
+    return no1 / no2;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Function Name :   DivFloat
+//  Description   :   Performs division of two float numbers safely
+//  Input         :   Float, Float
+//  Output        :   Float
+//
+/////////////////////////////////////////////////////////////////////////////////////////////
+float DivFloat(float no1, float no2)
+{
+    if(no2 == 0.0f)
+    {
+        printf("Error : Division by zero\n");
+        return 0.0f;
+    }
+    return no1 / no2;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Generic Macro :   Div
+//  Description   :   Selects correct division function based on datatype
+//
+/////////////////////////////////////////////////////////////////////////////////////////////
+#define Div(no1, no2) _Generic((no1), \
+                        int   : DivInt, \
+                        float : DivFloat \
+                      )(no1, no2)
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Entry Point Function
+//
+/////////////////////////////////////////////////////////////////////////////////////////////
+int main()
+{
+    int iRet = Div(20, 5);
+    printf("%d\n", iRet);
+
+    float fRet = Div(20.5f, 2.5f);
+    printf("%f\n", fRet);
+
+    return 0;
+}

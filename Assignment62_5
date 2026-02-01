@@ -1,0 +1,71 @@
+////////////////////////////////////////////////////////
+//
+// Description : Program to handle all possible file related
+//               exceptions properly
+// Author      : Raj Samir Jadhav
+// Date        : 31/01/2026
+//
+////////////////////////////////////////////////////////
+
+import java.io.*;
+import java.util.*;
+
+class FileExceptionHandling
+{
+    public static void main(String args[])
+    {
+        Scanner sobj = new Scanner(System.in);
+        String FileName = null;
+
+        FileInputStream fin = null;
+
+        try
+        {
+            System.out.println("Enter file name : ");
+            FileName = sobj.nextLine();
+
+            fin = new FileInputStream(FileName);
+
+            System.out.println("File opened successfully");
+
+            // Dummy read operation
+            while(fin.read() != -1)
+            {
+                // Reading file
+            }
+
+            System.out.println("File read successfully");
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Error: File not found");
+        }
+        catch(SecurityException e)
+        {
+            System.out.println("Error: Permission denied to access file");
+        }
+        catch(IOException e)
+        {
+            System.out.println("Error: Problem while reading the file");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error: Unknown exception occurred");
+        }
+        finally
+        {
+            try
+            {
+                if(fin != null)
+                {
+                    fin.close();
+                }
+                sobj.close();
+            }
+            catch(IOException e)
+            {
+                System.out.println("Error while closing the file");
+            }
+        }
+    }
+}
